@@ -1,0 +1,50 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: filestore
+  name: filestore
+spec:
+  ports:
+  - port: 5678
+    targetPort: 5678
+    protocol: TCP
+  type: ClusterIP
+  externalIPs:
+  - 192.168.1.250
+  selector:
+    app: filestore
+    purpose: storage
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: filestore
+spec:
+  selector:
+    matchLabels:
+      app: filestore
+      purpose: storage
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: filestore
+        purpose: storage
+    spec:
+      containers:
+      - name: filestore
+        image: filestore
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5678
+        volumeMounts:
+        - name: fsvol
+          mountPath: /app/uploads
+      volumes:
+      - name: fsvol
+        hostPath:
+          path: /home/chico5g/data/FS
+          type: Directory

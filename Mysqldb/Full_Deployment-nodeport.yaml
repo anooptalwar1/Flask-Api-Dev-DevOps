@@ -1,0 +1,121 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysqldb
+spec:
+  ports:
+  - port: 3306
+    targetPort: 3306
+  type: ClusterIP
+  selector:
+    app: mysqldb
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysqldb
+spec:
+  selector:
+    matchLabels:
+      app: mysqldb
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysqldb
+    spec:
+      containers:
+      - image: mysqldb:latest
+        imagePullPolicy: IfNotPresent
+        name: mysqldb
+        env:
+          # Use secret in real usage
+        - name: MYSQL_ROOT_PASSWORD
+          value: Passw0rd
+        ports:
+        - containerPort: 3306
+          name: mysqldb
+#        volumeMounts:
+#        - name: mysql-persistent-storage
+#          mountPath: /var/lib/mysql
+#      volumes:
+#      - name: mysql-persistent-storage
+#        persistentVolumeClaim:
+#          claimName: mysql-pv-claim
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: umflask
+  name: umflask
+spec:
+  ports:
+  - port: 5000
+    targetPort: 5000
+    nodePort: 32001
+    protocol: TCP
+  type: NodePort
+  selector:
+    service: umflask
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: umflask
+spec:
+  selector:
+    matchLabels:
+      app: umflask
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: umflask
+    spec:
+      containers:
+      - name: umflask
+        image: umflask
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: pmflask
+  name: pmflask
+spec:
+  ports:
+  - port: 5010
+    targetPort: 5010
+    nodePort: 32002
+    protocol: TCP
+  type: NodePort
+  selector:
+    service: pmflask
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pmflask
+spec:
+  selector:
+    matchLabels:
+      app: pmflask
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pmflask
+    spec:
+      containers:
+      - name: pmflask
+        image: pmflask
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5010
