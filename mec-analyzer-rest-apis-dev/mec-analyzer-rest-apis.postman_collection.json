@@ -1,0 +1,299 @@
+{
+	"info": {
+		"_postman_id": "0cfad984-03d2-4e24-857b-cbe6e06993ae",
+		"name": "MEC Analyzer REST APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "View Uploaded files",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://192.168.1.250:5210/api/mec/files",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"250"
+					],
+					"port": "5210",
+					"path": [
+						"api",
+						"mec",
+						"files"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload New File",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/C:/Users/WCC-Laptop-1/Desktop/Capture2.PNG"
+					},
+					"options": {
+						"file": {}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.250:5210/api/mec/files/Capture2.PNG",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"250"
+					],
+					"port": "5210",
+					"path": [
+						"api",
+						"mec",
+						"files",
+						"Capture2.PNG"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Download file",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://192.168.1.250:5210/api/mec/files/Capture2.PNG",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"250"
+					],
+					"port": "5210",
+					"path": [
+						"api",
+						"mec",
+						"files",
+						"Capture2.PNG"
+					],
+					"query": [
+						{
+							"key": "filename",
+							"value": "app_constants.py",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post MEC Report Records",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Access-Control-Allow-Origin",
+						"value": "*",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"timestamp\": 10,\r\n\t\"latency\": null,\r\n\t\"downloadBandwidth\": null,\r\n\t\"uploadBandwidth\": null,\r\n\t\"computation\": null,\r\n\t\"notes\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.250:5210/api/mec/records",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"250"
+					],
+					"port": "5210",
+					"path": [
+						"api",
+						"mec",
+						"records"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get MEC Report Records for deviceId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.250:5210/api/mec/records/UUID2",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"250"
+					],
+					"port": "5210",
+					"path": [
+						"api",
+						"mec",
+						"records",
+						"UUID2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all MEC Report Records",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.250:5210/api/mec/records",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"250"
+					],
+					"port": "5210",
+					"path": [
+						"api",
+						"mec",
+						"records"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get File Conversion Time",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.250:5210/api/mec/files/convert",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"250"
+					],
+					"port": "5210",
+					"path": [
+						"api",
+						"mec",
+						"files",
+						"convert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all MEC Reports Records",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.250:5210/api/mec/records",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"250"
+					],
+					"port": "5210",
+					"path": [
+						"api",
+						"mec",
+						"records"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get MEC Client Portal IP",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.250:5210/api/mec/clientIp",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"250"
+					],
+					"port": "5210",
+					"path": [
+						"api",
+						"mec",
+						"clientIp"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "8c1628e5-689a-418d-876f-0431da772f8d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "ffe2e27d-a1f7-40ef-bb53-c920a6645ec1",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
