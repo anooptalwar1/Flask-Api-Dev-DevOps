@@ -1,0 +1,67 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: speedanalyse
+  name: speedanalyse
+spec:
+  ports:
+  - port: 5210
+    targetPort: 5210
+  type: ClusterIP
+  externalIPs:
+  - 192.168.1.250 #Please change the external IP
+  selector:
+    app: speedanalyse
+    purpose: speedanalysis
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: speedanalyse
+spec:
+  selector:
+    matchLabels:
+      app: speedanalyse
+      purpose: speedanalysis
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: speedanalyse
+        purpose: speedanalysis
+    spec:
+      containers:
+      - name: speedanalyse
+        image: speedanalyse
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5210
+        resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m
+
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: filestore
+  namespace: default
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: filestore
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 30
+

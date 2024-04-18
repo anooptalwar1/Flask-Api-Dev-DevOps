@@ -1,0 +1,182 @@
+{
+	"info": {
+		"_postman_id": "94bca26a-0005-4927-b9a6-0816e4444cbb",
+		"name": "WCC Procedure Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Procedure",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}api/procedure/1",
+					"host": [
+						"{{BASE_URL}}api"
+					],
+					"path": [
+						"procedure",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Procedure Names",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "object_id",
+						"value": "1",
+						"type": "text"
+					},
+					{
+						"key": "object_name",
+						"value": "robotic arm",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}api/procedure/names",
+					"host": [
+						"{{BASE_URL}}api"
+					],
+					"path": [
+						"procedure",
+						"names"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Procedure",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "id",
+						"value": "1",
+						"type": "text"
+					},
+					{
+						"key": "object_id",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"dept\": \"ajdsh\",\n    \"document_id\": \"kh\",\n    \"escalation_plan\": \"khk\",\n    \"name\": \"Wire Fitting\",\n    \"purpose\": \"kh\",\n    \"safety_req\": \"kh\",\n    \"spec_reference\": \"jghj\",\n    \"steps\": [\n        {\n            \"description\": \"afdas\",\n            \"name\": \"Step 1\",\n            \"sequence_number\": 1,\n            \"type\": \"TEXT\"\n        },\n        {\n            \"media_url\": \"https://google.com\",\n            \"name\": \"Step 2\",\n            \"sequence_number\": 2,\n            \"type\": \"VIDEO\",\n            \"description\": \"afdas\"\n        },\n        {\n            \"description\": \"afdas\",\n            \"name\": \"Step 3\",\n            \"sequence_number\": 4,\n            \"type\": \"TEXT\"\n        },\n        {\n            \"media_url\": \"http://google.com\",\n            \"name\": \"Step 4\",\n            \"sequence_number\": 3,\n            \"type\": \"IMAGE\",\n            \"description\": \"afdas\"\n        }\n    ],\n    \"tools\": \"kh\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}api/procedure",
+					"host": [
+						"{{BASE_URL}}api"
+					],
+					"path": [
+						"procedure"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deactivate Procedure",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "id",
+						"value": "3",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}api/procedure/2",
+					"host": [
+						"{{BASE_URL}}api"
+					],
+					"path": [
+						"procedure",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Procedure",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "id",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"dept\": \"ajdsh\",\n    \"document_id\": \"kh\",\n    \"escalation_plan\": \"khk\",\n    \"name\": \"Wire fitting Updated\",\n    \"purpose\": \"kh\",\n    \"safety_req\": \"kh\",\n    \"spec_reference\": \"jghj\",\n    \"steps\": [\n        {\n        \t\"id\": 1,\n        \t\"media_url\": \"https://google.com\",\n            \"description\": \"afdas\",\n            \"name\": \"Step 13\",\n            \"sequence_number\": 1,\n            \"type\": \"VIDEO\"\n        },\n        {\n        \t\"id\": 2,\n            \"media_url\": \"https://google.com\",\n            \"name\": \"Step 2\",\n            \"sequence_number\": 2,\n            \"type\": \"IMAGE\",\n            \"description\": \"afdas\"\n        },\n        {\n            \"description\": \"afdas\",\n            \"name\": \"Step 3\",\n            \"sequence_number\": 3,\n            \"type\": \"TEXT\"\n        },\n        {\n            \"media_url\": \"http://google.com\",\n            \"name\": \"Step 4\",\n            \"sequence_number\": 4,\n            \"type\": \"VIDEO\",\n            \"description\": \"afdas\"\n        }\n    ],\n    \"tools\": \"dfdkh\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}api/procedure/1",
+					"host": [
+						"{{BASE_URL}}api"
+					],
+					"path": [
+						"procedure",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Object Names",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}api/object/names",
+					"host": [
+						"{{BASE_URL}}api"
+					],
+					"path": [
+						"object",
+						"names"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,0 +1,35 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: umflask
+  name: umflask
+spec:
+  ports:
+  - port: 5000
+    targetPort: 5000
+  type: ClusterIP
+  selector:
+    service: umflask
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: umflask
+spec:
+  selector:
+    matchLabels:
+      app: umflask
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: umflask
+    spec:
+      containers:
+      - name: umflask
+        image: umflask
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5000

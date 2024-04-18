@@ -1,0 +1,40 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: pmflask
+  name: pmflask
+spec:
+  ports:
+  - port: 5010
+    targetPort: 5010
+  type: ClusterIP
+  externalIPs:
+  - 192.168.1.250 #Please change the external IP
+  selector:
+    app: pmflask
+    purpose: proceduremanagement
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pmflask
+spec:
+  selector:
+    matchLabels:
+      app: pmflask
+      purpose: proceduremanagement
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pmflask
+        purpose: proceduremanagement
+    spec:
+      containers:
+      - name: pmflask
+        image: pmflask
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5010

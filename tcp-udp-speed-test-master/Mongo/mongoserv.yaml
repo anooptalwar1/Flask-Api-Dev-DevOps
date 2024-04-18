@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: mongo
+  name: mongo
+spec:
+  ports:
+  - port: 27017
+    targetPort: 27017
+  type: ClusterIP
+  externalIPs:
+  - 192.168.1.250
+  selector:
+    role: mongo
+
